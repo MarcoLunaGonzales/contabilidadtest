@@ -1086,31 +1086,17 @@ function obtenerResponsableSIS($codigoComponente){
   echo $sql;
   $stmt = $dbh->prepare($sql);
   $stmt->execute();
-  //$personal="";
+  $personal="";
   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
       $personal="Responsable: (".$row['nombre'].")";
   }
   return($personal);  
 }
 
-
-
-function testGit($idRegistroEjecucion){
-  $dbh = new Conexion();
-  $sql="SELECT IFNULL(SUM(a.archivo),0)as archivo from actividades_poaejecucion a where a.id=$idRegistroEjecucion";
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute();
-  $archivo=0;
-  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      $archivo=$row['archivo'];
-  }
-  return($archivo);
-}
-
 function obtenerResponsableSIS($codigoComponente){
   $dbh = new Conexion();
   $sql="SELECT p.nombre from personal2 p, componentessis c where c.cod_personal=p.codigo and c.codigo=$codigoComponente";
-  //echo $sql;
+ echo $sql;
   $stmt = $dbh->prepare($sql);
   $stmt->execute();
   $personal="";
